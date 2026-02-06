@@ -181,15 +181,15 @@ FontColor=255,255,255,255
 Meter=Shape
 Shape=Rectangle 0,0,(180*[Set.S]),(25*[Set.S]),(5*[Set.S]),(5*[Set.S]) | StrokeWidth 0 | Fill Color 255,255,255,30
 X=([ContentContainer:W]-210*[Set.S])
-Y=([Option10:Y]-#Set.P#+(-25/2+8)*[Set.S])
+Y=([Option10:Y]+(-25/2+8)*[Set.S])
 DynamicVariables=1
 Hidden=[&Func:returnBool('Layout', 'WASD', '0', '1')]
 
 [KBLayoutLabel]
 Meter=String
 Text=#KeyboardLayout#
-X=(90*[Set.S])r
-Y=(12.5*[Set.S])r
+X=([KeyboardLayoutSelector:X]+(90*[Set.S]))
+Y=([KeyboardLayoutSelector:Y]+(12.5*[Set.S]))
 FontFace=Poppins SemiBold
 FontSize=(10*[Set.S])
 FontColor=255,255,255
@@ -203,79 +203,79 @@ Hidden=[&Func:returnBool('Layout', 'WASD', '0', '1')]
 Meter=Shape
 Shape=Rectangle 0,0,(180*[Set.S]),(175*[Set.S]),(5*[Set.S]),(5*[Set.S]) | StrokeWidth 0 | Fill Color 40,40,40,240
 X=([KeyboardLayoutSelector:X])
-Y=([KeyboardLayoutSelector:Y]+27*[Set.S])
+Y=([KeyboardLayoutSelector:Y]+(27*[Set.S]))
 DynamicVariables=1
 Hidden=1
 
 [QWERTY_KB]
 Meter=String
 Text=QWERTY
-MeterStyle=Set.String:S | KBLayoutSelect:S | [&Func:returnBool('KeyboardLayout', 'QWERTY', 'KBLayoutSelected:S', '')]
-X=(90*[Set.S])r
-Y=(15*[Set.S])r
+MeterStyle=Set.String:S | KBLayoutSelect:S
+X=([KBLayoutDropdown:X]+(90*[Set.S]))
+Y=([KBLayoutDropdown:Y]+(15*[Set.S]))
 Group=KBLayoutItems
 Hidden=1
-LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "QWERTY" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "QWERTY"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!CommandMeasure Script:M "Generate()"]
+LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "QWERTY" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "QWERTY"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!UpdateMeter KBLayoutLabel][!CommandMeasure Script:M "Generate()"]
 
 [Dvorak]
 Meter=String
 Text=Dvorak
-MeterStyle=Set.String:S | KBLayoutSelect:S | [&Func:returnBool('KeyboardLayout', 'Dvorak', 'KBLayoutSelected:S', '')]
+MeterStyle=Set.String:S | KBLayoutSelect:S
 X=r
 Y=(20*[Set.S])r
 Group=KBLayoutItems
 Hidden=1
-LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "Dvorak" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "Dvorak"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!CommandMeasure Script:M "Generate()"]
+LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "Dvorak" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "Dvorak"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!UpdateMeter KBLayoutLabel][!CommandMeasure Script:M "Generate()"]
 
 [Colemak]
 Meter=String
 Text=Colemak
-MeterStyle=Set.String:S | KBLayoutSelect:S | [&Func:returnBool('KeyboardLayout', 'Colemak', 'KBLayoutSelected:S', '')]
+MeterStyle=Set.String:S | KBLayoutSelect:S
 X=r
 Y=(20*[Set.S])r
 Group=KBLayoutItems
 Hidden=1
-LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "Colemak" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "Colemak"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!CommandMeasure Script:M "Generate()"]
+LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "Colemak" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "Colemak"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!UpdateMeter KBLayoutLabel][!CommandMeasure Script:M "Generate()"]
 
 [ColemakDH]
 Meter=String
 Text=Colemak DH
-MeterStyle=Set.String:S | KBLayoutSelect:S | [&Func:returnBool('KeyboardLayout', 'ColemakDH', 'KBLayoutSelected:S', '')]
+MeterStyle=Set.String:S | KBLayoutSelect:S
 X=r
 Y=(20*[Set.S])r
 Group=KBLayoutItems
 Hidden=1
-LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "ColemakDH" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "ColemakDH"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!CommandMeasure Script:M "Generate()"]
+LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "ColemakDH" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "ColemakDH"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!UpdateMeter KBLayoutLabel][!CommandMeasure Script:M "Generate()"]
 
 [Workman]
 Meter=String
 Text=Workman
-MeterStyle=Set.String:S | KBLayoutSelect:S | [&Func:returnBool('KeyboardLayout', 'Workman', 'KBLayoutSelected:S', '')]
+MeterStyle=Set.String:S | KBLayoutSelect:S
 X=r
 Y=(20*[Set.S])r
 Group=KBLayoutItems
 Hidden=1
-LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "Workman" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "Workman"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!CommandMeasure Script:M "Generate()"]
+LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "Workman" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "Workman"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!UpdateMeter KBLayoutLabel][!CommandMeasure Script:M "Generate()"]
 
 [Norman]
 Meter=String
 Text=Norman
-MeterStyle=Set.String:S | KBLayoutSelect:S | [&Func:returnBool('KeyboardLayout', 'Norman', 'KBLayoutSelected:S', '')]
+MeterStyle=Set.String:S | KBLayoutSelect:S
 X=r
 Y=(20*[Set.S])r
 Group=KBLayoutItems
 Hidden=1
-LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "Norman" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "Norman"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!CommandMeasure Script:M "Generate()"]
+LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "Norman" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "Norman"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!UpdateMeter KBLayoutLabel][!CommandMeasure Script:M "Generate()"]
 
 [AZERTY]
 Meter=String
 Text=AZERTY
-MeterStyle=Set.String:S | KBLayoutSelect:S | [&Func:returnBool('KeyboardLayout', 'AZERTY', 'KBLayoutSelected:S', '')]
+MeterStyle=Set.String:S | KBLayoutSelect:S
 X=r
 Y=(20*[Set.S])r
 Group=KBLayoutItems
 Hidden=1
-LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "AZERTY" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "AZERTY"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!CommandMeasure Script:M "Generate()"]
+LeftMouseUpAction=[!WriteKeyValue Variables KeyboardLayout "AZERTY" "#Sec.SaveLocation#"][!SetVariable KeyboardLayout "AZERTY"][!HideMeter KBLayoutDropdown][!HideMeterGroup KBLayoutItems][!UpdateMeter KBLayoutLabel][!CommandMeasure Script:M "Generate()"]
 
 [Circ]
 Meter=Shape
