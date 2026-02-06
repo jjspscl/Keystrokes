@@ -3,6 +3,56 @@ array2 = {'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'}
 array3 = {'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'}
 array4 = {'Z', 'X', 'C', 'V', 'B', 'N', 'M'}
 
+keyboardLayouts = {
+    QWERTY = {
+        row1 = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
+        row2 = {'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'},
+        row3 = {'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'},
+        row4 = {'Z', 'X', 'C', 'V', 'B', 'N', 'M'}
+    },
+    Dvorak = {
+        row1 = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
+        row2 = {"'", ',', '.', 'P', 'Y', 'F', 'G', 'C', 'R', 'L'},
+        row3 = {'A', 'O', 'E', 'U', 'I', 'D', 'H', 'T', 'N'},
+        row4 = {';', 'Q', 'J', 'K', 'X', 'B', 'M'}
+    },
+    Colemak = {
+        row1 = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
+        row2 = {'Q', 'W', 'F', 'P', 'G', 'J', 'L', 'U', 'Y', ';'},
+        row3 = {'A', 'R', 'S', 'T', 'D', 'H', 'N', 'E', 'I'},
+        row4 = {'Z', 'X', 'C', 'V', 'B', 'K', 'M'}
+    },
+    ColemakDH = {
+        row1 = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
+        row2 = {'Q', 'W', 'F', 'P', 'B', 'J', 'L', 'U', 'Y', ';'},
+        row3 = {'A', 'R', 'S', 'T', 'G', 'M', 'N', 'E', 'I'},
+        row4 = {'Z', 'X', 'C', 'D', 'V', 'K', 'H'}
+    },
+    Workman = {
+        row1 = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
+        row2 = {'Q', 'D', 'R', 'W', 'B', 'J', 'F', 'U', 'P', ';'},
+        row3 = {'A', 'S', 'H', 'T', 'G', 'Y', 'N', 'E', 'O'},
+        row4 = {'Z', 'X', 'M', 'C', 'V', 'K', 'L'}
+    },
+    Norman = {
+        row1 = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
+        row2 = {'Q', 'W', 'D', 'F', 'K', 'J', 'U', 'R', 'L', ';'},
+        row3 = {'A', 'S', 'E', 'T', 'G', 'Y', 'N', 'I', 'O'},
+        row4 = {'Z', 'X', 'C', 'V', 'B', 'H', 'M'}
+    },
+    AZERTY = {
+        row1 = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'},
+        row2 = {'A', 'Z', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'},
+        row3 = {'Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'},
+        row4 = {'W', 'X', 'C', 'V', 'B', 'N', 'M'}
+    }
+}
+
+label1 = array1
+label2 = array2
+label3 = array3
+label4 = array4
+
 function Initialize()
     r1 = SKIN:GetVariable('Row1')
     r2 = SKIN:GetVariable('Row2')
@@ -10,10 +60,38 @@ function Initialize()
     r4 = SKIN:GetVariable('Row4')
     saveLocation = SKIN:GetVariable('Sec.SaveLocation')
     root = SKIN:GetVariable('ROOTCONFIGPATH')
+    
+    local kbLayout = SKIN:GetVariable('KeyboardLayout') or 'QWERTY'
+    if keyboardLayouts[kbLayout] then
+        label1 = keyboardLayouts[kbLayout].row1
+        label2 = keyboardLayouts[kbLayout].row2
+        label3 = keyboardLayouts[kbLayout].row3
+        label4 = keyboardLayouts[kbLayout].row4
+    else
+        -- Default to QWERTY if invalid layout
+        label1 = keyboardLayouts['QWERTY'].row1
+        label2 = keyboardLayouts['QWERTY'].row2
+        label3 = keyboardLayouts['QWERTY'].row3
+        label4 = keyboardLayouts['QWERTY'].row4
+    end
 end
 
 function Generate()
     print("Generating...")
+    
+    local kbLayout = SKIN:GetVariable('KeyboardLayout') or 'QWERTY'
+    if keyboardLayouts[kbLayout] then
+        label1 = keyboardLayouts[kbLayout].row1
+        label2 = keyboardLayouts[kbLayout].row2
+        label3 = keyboardLayouts[kbLayout].row3
+        label4 = keyboardLayouts[kbLayout].row4
+    else
+        label1 = keyboardLayouts['QWERTY'].row1
+        label2 = keyboardLayouts['QWERTY'].row2
+        label3 = keyboardLayouts['QWERTY'].row3
+        label4 = keyboardLayouts['QWERTY'].row4
+    end
+    
     local File = io.open(SKIN:GetVariable('SKINSPATH')..'Keystrokes\\Main\\Styles\\QWERTY.inc','w')
     File:write(
         '[Background]\n'
@@ -40,7 +118,7 @@ function Generate()
         ,'['..array1[1]..'Label]\n'
         ,'Meter=String\n'
         ,'MeterStyle=Key'..LabelString..':S\n'
-        ,'Text='..array1[1]..'\n'
+        ,'Text='..label1[1]..'\n'
     )
 
     for i=2, 10 do
@@ -59,7 +137,7 @@ function Generate()
             ,'['..array1[i]..'Label]\n'
             ,'Meter=String\n'
             ,'MeterStyle=Key'..LabelString..':S\n'
-            ,'Text='..array1[i]..'\n'
+            ,'Text='..label1[i]..'\n'
         )
     end
     -- -------------------------------------------------------------------------- --
@@ -82,7 +160,7 @@ function Generate()
         ,'['..array2[1]..'Label]\n'
         ,'Meter=String\n'
         ,'MeterStyle=Key'..LabelString..':S\n'
-        ,'Text='..array2[1]..'\n'
+        ,'Text='..label2[1]..'\n'
     )
 
     for i=2, 10 do
@@ -101,7 +179,7 @@ function Generate()
             ,'['..array2[i]..'Label]\n'
             ,'Meter=String\n'
             ,'MeterStyle=Key'..LabelString..':S\n'
-            ,'Text='..array2[i]..'\n'
+            ,'Text='..label2[i]..'\n'
         )
     end
     -- -------------------------------------------------------------------------- --
@@ -124,7 +202,7 @@ function Generate()
         ,'['..array3[1]..'Label]\n'
         ,'Meter=String\n'
         ,'MeterStyle=Key'..LabelString..':S\n'
-        ,'Text='..array3[1]..'\n'
+        ,'Text='..label3[1]..'\n'
     )
 
     for i=2, 9 do
@@ -143,7 +221,7 @@ function Generate()
             ,'['..array3[i]..'Label]\n'
             ,'Meter=String\n'
             ,'MeterStyle=Key'..LabelString..':S\n'
-            ,'Text='..array3[i]..'\n'
+            ,'Text='..label3[i]..'\n'
         )
     end
     -- -------------------------------------------------------------------------- --
@@ -166,7 +244,7 @@ function Generate()
         ,'['..array4[1]..'Label]\n'
         ,'Meter=String\n'
         ,'MeterStyle=Key'..LabelString..':S\n'
-        ,'Text='..array4[1]..'\n'
+        ,'Text='..label4[1]..'\n'
     )
 
     for i=2, 7 do
@@ -185,7 +263,7 @@ function Generate()
             ,'['..array4[i]..'Label]\n'
             ,'Meter=String\n'
             ,'MeterStyle=Key'..LabelString..':S\n'
-            ,'Text='..array4[i]..'\n'
+            ,'Text='..label4[i]..'\n'
         )
     end
     File:close()
@@ -338,4 +416,28 @@ function Toggle(key)
     r2 = SKIN:GetVariable('Row2')
     r3 = SKIN:GetVariable('Row3')
     r4 = SKIN:GetVariable('Row4')
+end
+
+function GetKeyLabel(row, position)
+    local kbLayout = SKIN:GetVariable('KeyboardLayout') or 'QWERTY'
+    local layout = keyboardLayouts[kbLayout] or keyboardLayouts['QWERTY']
+    
+    if row == 1 and position >= 1 and position <= 10 then
+        return layout.row1[position]
+    elseif row == 2 and position >= 1 and position <= 10 then
+        return layout.row2[position]
+    elseif row == 3 and position >= 1 and position <= 9 then
+        return layout.row3[position]
+    elseif row == 4 and position >= 1 and position <= 7 then
+        return layout.row4[position]
+    end
+    return ''
+end
+
+function GetSupportedLayouts()
+    local layouts = {}
+    for k, v in pairs(keyboardLayouts) do
+        table.insert(layouts, k)
+    end
+    return table.concat(layouts, '|')
 end
