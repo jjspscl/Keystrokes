@@ -95,6 +95,24 @@ There are currently two layout presets available in Keystrokes. They are,
 
 > **Note:** Mouse Buttons and Mouse Accelerometer can be toggled On or Off when using either preset.
 
+#### Keyboard Layouts (Fullboard):
+
+When using the Fullboard preset, you can select from multiple keyboard layouts to match your physical keyboard:
+- **QWERTY** (default)
+- **Dvorak**
+- **Colemak**
+- **Colemak DH**
+- **Workman**
+- **Norman**
+- **AZERTY**
+
+To change the keyboard layout:
+1. Open Core and head over to the **Modules** section.
+2. Select **Keystrokes** from the list and proceed to the **Layout** tab.
+3. Select **Fullboard** as your layout preset.
+4. Click the **Keyboard layout** dropdown and select your preferred layout.
+5. The skin will automatically regenerate with the new key labels.
+
 #### Hotkeys:
 Using hotkeys, you can toggle **Draggability** and **Visibility**. Simply follow the steps below to setup hotkeys for the aforementioned actions.
 
